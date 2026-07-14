@@ -1,0 +1,41 @@
+{
+    "name": "kilden/laravel",
+    "description": "Kilden for Laravel — server-side events, queued delivery and the /kilden/identity endpoint.",
+    "type": "library",
+    "license": "MIT",
+    "keywords": ["kilden", "laravel", "analytics", "cdp", "feature-flags"],
+    "homepage": "https://kilden.io",
+    "support": {
+        "docs": "https://docs.kilden.io",
+        "issues": "https://github.com/freshworkstudio/kilden-sdk-php/issues"
+    },
+    "require": {
+        "php": ">=8.2",
+        "illuminate/support": "^11.0|^12.0|^13.0",
+        "kilden/kilden-php": "^0.1@alpha"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^9.0|^10.0|^11.0"
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../..",
+            "options": { "symlink": true, "versions": { "kilden/kilden-php": "0.1.0-alpha.1" } }
+        }
+    ],
+    "autoload": {
+        "psr-4": { "Kilden\\Laravel\\": "src/" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Kilden\\Laravel\\Tests\\": "tests/" }
+    },
+    "extra": {
+        "laravel": {
+            "providers": ["Kilden\\Laravel\\KildenServiceProvider"],
+            "aliases": { "Kilden": "Kilden\\Laravel\\Facades\\Kilden" }
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
