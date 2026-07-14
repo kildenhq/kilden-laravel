@@ -7,7 +7,7 @@
     "homepage": "https://kilden.io",
     "support": {
         "docs": "https://docs.kilden.io",
-        "issues": "https://github.com/freshworkstudio/kilden-sdk-php/issues"
+        "issues": "https://github.com/kildenhq/kilden-sdk-php/issues"
     },
     "require": {
         "php": ">=8.2",
