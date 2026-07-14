@@ -43,7 +43,7 @@ return [
     |--------------------------------------------------------------------------
     | Identity verification
     |--------------------------------------------------------------------------
-    | Secret + key id for signing identity tokens (docs.kilden.io/identity).
+    | Secret + key id for signing identity tokens (kilden.io/docs/identity).
     | Used by the POST /kilden/identity endpoint and Kilden::identityToken().
     */
     'identity' => [

@@ -6,7 +6,7 @@
     "keywords": ["kilden", "laravel", "analytics", "cdp", "feature-flags"],
     "homepage": "https://kilden.io",
     "support": {
-        "docs": "https://docs.kilden.io",
+        "docs": "https://kilden.io/docs",
         "issues": "https://github.com/kildenhq/kilden-sdk-php/issues"
     },
     "require": {

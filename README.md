@@ -113,7 +113,7 @@ Read-only subtree split of
 — issues and pull requests go there. Behavior is governed by the
 [server SDK spec](https://github.com/kildenhq/kilden-sdk-spec).
 
-- [docs.kilden.io](https://docs.kilden.io)
+- [kilden.io/docs](https://kilden.io/docs)
 - [Discussions](https://github.com/kildenhq/kilden-sdk-php/discussions)
 
 ## License
