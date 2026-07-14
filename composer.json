@@ -21,7 +21,7 @@
         {
             "type": "path",
             "url": "../..",
-            "options": { "symlink": true, "versions": { "kilden/kilden-php": "0.1.0-alpha.1" } }
+            "options": { "symlink": true, "versions": { "kilden/kilden-php": "0.1.0-alpha.2" } }
         }
     ],
     "autoload": {
