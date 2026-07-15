@@ -41,6 +41,21 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Frontend snippet (@kildenScript)
+    |--------------------------------------------------------------------------
+    | @kildenScript renders the web SDK loader in your Blade layout. This is
+    | the PUBLIC wk_ key — a separate entry on purpose, so the secret sk_ key
+    | above can never leak into a view. Unset = the directive renders nothing.
+    */
+    'frontend' => [
+        'write_key' => env('KILDEN_PUBLIC_WRITE_KEY'),
+        'cdn' => env('KILDEN_CDN', 'https://cdn.kilden.io/kilden.iife.js'),
+        // Extra kilden.init options rendered as JSON (e.g. 'debug' => true).
+        'options' => [],
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Identity verification
     |--------------------------------------------------------------------------
     | Secret + key id for signing identity tokens (kilden.io/docs/identity).

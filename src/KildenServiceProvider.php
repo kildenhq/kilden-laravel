@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Kilden\Laravel;
 
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Kilden\Client;
 use Kilden\IdentitySigner;
@@ -52,6 +53,11 @@ class KildenServiceProvider extends ServiceProvider
                 __DIR__ . '/../config/kilden.php' => config_path('kilden.php'),
             ], 'kilden-config');
         }
+
+        // @kildenScript — the web SDK loader, configured from config/kilden.php.
+        Blade::directive('kildenScript', static function (): string {
+            return '<?php echo \Kilden\Laravel\FrontendSnippet::render(); ?>';
+        });
 
         // Long-running runtimes (Octane, queue workers) never hit PHP's
         // shutdown handler between requests; terminating() drains per request.
