@@ -50,6 +50,10 @@ return [
     'frontend' => [
         'write_key' => env('KILDEN_PUBLIC_WRITE_KEY'),
         'cdn' => env('KILDEN_CDN', 'https://cdn.kilden.io/kilden.iife.js'),
+        // The host the BROWSER posts to. Only needed when it differs from
+        // 'host' above — e.g. the server sends in-cluster while the browser
+        // must use the public ingest URL. Null = same as 'host'.
+        'host' => env('KILDEN_PUBLIC_HOST'),
         // Extra kilden.init options rendered as JSON (e.g. 'debug' => true).
         'options' => [],
     ],

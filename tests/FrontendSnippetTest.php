@@ -103,4 +103,23 @@ class FrontendSnippetTest extends TestCase
 
         $this->assertStringContainsString('"apiHost":"https://ingest.example.com"', FrontendSnippet::render());
     }
+
+    public function test_frontend_host_wins_over_the_server_host(): void
+    {
+        // The panel-style split: the server posts in-cluster, the browser
+        // must use the public ingest host.
+        config(['kilden.host' => 'http://capture:8080']);
+        config(['kilden.frontend.host' => 'https://ingest.example.com']);
+
+        $this->assertStringContainsString('"apiHost":"https://ingest.example.com"', FrontendSnippet::render());
+        $this->assertStringNotContainsString('capture:8080', FrontendSnippet::render());
+    }
+
+    public function test_frontend_host_equal_to_cloud_default_omits_api_host(): void
+    {
+        config(['kilden.host' => 'http://capture:8080']);
+        config(['kilden.frontend.host' => 'https://ingest.kilden.io']);
+
+        $this->assertStringNotContainsString('apiHost', FrontendSnippet::render());
+    }
 }

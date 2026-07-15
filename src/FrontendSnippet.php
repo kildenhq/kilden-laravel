@@ -77,7 +77,10 @@ class FrontendSnippet
         /** @var array<string, mixed> $options */
         $options = (array) config('kilden.frontend.options', []);
 
-        $host = (string) config('kilden.host', self::CLOUD_HOST);
+        // The browser's host: frontend.host when set (server posting
+        // in-cluster while the browser needs the public ingest), otherwise
+        // the shared kilden.host.
+        $host = (string) (config('kilden.frontend.host') ?: config('kilden.host', self::CLOUD_HOST));
         if ($host !== self::CLOUD_HOST && ! array_key_exists('apiHost', $options)) {
             $options['apiHost'] = $host;
         }
