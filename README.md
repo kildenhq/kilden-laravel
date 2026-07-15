@@ -50,6 +50,27 @@ when the job finishes). With `KILDEN_QUEUE=true`, calls dispatch a job
 instead of sending inline — the timestamp is stamped at call time, so
 nothing shifts.
 
+## Frontend in one line
+
+`@kildenScript` renders the official web SDK loader in your layout —
+configured, identity-wired, and auto-identifying the logged-in user:
+
+```blade
+<head>
+    ...
+    @kildenScript
+</head>
+```
+
+```env
+KILDEN_PUBLIC_WRITE_KEY=wk_...   # the PUBLIC key — never sk_ in a view
+```
+
+If the identity route below is registered, the snippet wires the SDK's
+`getIdentityToken` to it automatically, so browser events come out
+**verified** with zero extra code. Without `KILDEN_PUBLIC_WRITE_KEY` (or with
+`KILDEN_ENABLED=false`) the directive renders nothing.
+
 ## Identity verification
 
 The browser SDK can prove who its events belong to — but only your backend
