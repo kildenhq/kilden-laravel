@@ -68,8 +68,10 @@ KILDEN_PUBLIC_WRITE_KEY=wk_...   # the PUBLIC key — never sk_ in a view
 
 If the identity route below is registered, the snippet wires the SDK's
 `getIdentityToken` to it automatically, so browser events come out
-**verified** with zero extra code. Without `KILDEN_PUBLIC_WRITE_KEY` (or with
-`KILDEN_ENABLED=false`) the directive renders nothing.
+**verified** with zero extra code. The wiring resolves the route by name
+(`kilden.identity`), so a custom path — `KildenRoutes::identity('/api/kilden-token')`
+— is picked up without further configuration. Without `KILDEN_PUBLIC_WRITE_KEY`
+(or with `KILDEN_ENABLED=false`) the directive renders nothing.
 
 ## Identity verification
 
