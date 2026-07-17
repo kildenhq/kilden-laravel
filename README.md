@@ -66,6 +66,18 @@ configured, identity-wired, and auto-identifying the logged-in user:
 KILDEN_PUBLIC_WRITE_KEY=wk_...   # the PUBLIC key — never sk_ in a view
 ```
 
+If your marketing site and your app live on different subdomains
+(`example.com` + `app.example.com`), one more env var makes the visitor
+survive the crossing — the anonymous id moves into a cookie both hosts
+can read, and first-touch attribution rides along:
+
+```env
+KILDEN_COOKIE_DOMAIN=.example.com
+```
+
+Heads-up: this turns on cookies, which can affect your cookie-consent
+obligations — that is why it is off by default.
+
 If the identity route below is registered, the snippet wires the SDK's
 `getIdentityToken` to it automatically, so browser events come out
 **verified** with zero extra code. The wiring resolves the route by name
