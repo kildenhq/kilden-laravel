@@ -85,6 +85,20 @@ class FrontendSnippet
             $options['apiHost'] = $host;
         }
 
+        // One config key turns on the SDK's cross-subdomain identity: the
+        // persistence kind and the domain travel together, and nobody
+        // should have to know that. Explicit options win, per key — the
+        // developer speaking beats the derivation (same rule as apiHost).
+        $cookieDomain = config('kilden.frontend.cookie_domain');
+        if (is_string($cookieDomain) && $cookieDomain !== '') {
+            if (! array_key_exists('persistence', $options)) {
+                $options['persistence'] = 'localStorage+cookie';
+            }
+            if (! array_key_exists('cookieDomain', $options)) {
+                $options['cookieDomain'] = $cookieDomain;
+            }
+        }
+
         foreach ($options as $key => $value) {
             $pairs[] = self::js((string) $key) . ':' . self::js($value);
         }

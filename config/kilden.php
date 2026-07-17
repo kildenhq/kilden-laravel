@@ -54,6 +54,12 @@ return [
         // 'host' above — e.g. the server sends in-cluster while the browser
         // must use the public ingest URL. Null = same as 'host'.
         'host' => env('KILDEN_PUBLIC_HOST'),
+        // Share the anonymous id across subdomains (landing on example.com,
+        // app on app.example.com): set the registrable domain and the
+        // snippet ships persistence 'localStorage+cookie' + cookieDomain.
+        // Read the docs before enabling: turning cookies on can affect
+        // your cookie-consent obligations.
+        'cookie_domain' => env('KILDEN_COOKIE_DOMAIN'),
         // Extra kilden.init options rendered as JSON (e.g. 'debug' => true).
         'options' => [],
     ],

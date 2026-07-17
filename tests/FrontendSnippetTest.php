@@ -44,6 +44,43 @@ class FrontendSnippetTest extends TestCase
         $this->assertSame('', FrontendSnippet::render());
     }
 
+    public function test_cookie_domain_turns_on_cross_subdomain_identity(): void
+    {
+        // One env var (KILDEN_COOKIE_DOMAIN) and the snippet ships both
+        // halves of the SDK's cross-subdomain mode: nobody should have to
+        // know that the persistence kind and the domain travel together.
+        config(['kilden.frontend.cookie_domain' => '.example.com']);
+
+        $html = FrontendSnippet::render();
+
+        $this->assertStringContainsString('"persistence":"localStorage+cookie"', $html);
+        $this->assertStringContainsString('"cookieDomain":".example.com"', $html);
+    }
+
+    public function test_without_cookie_domain_the_snippet_says_nothing_about_cookies(): void
+    {
+        $html = FrontendSnippet::render();
+
+        $this->assertStringNotContainsString('cookieDomain', $html);
+        $this->assertStringNotContainsString('persistence', $html);
+    }
+
+    public function test_explicit_options_beat_the_cookie_domain_derivation(): void
+    {
+        // Same rule as apiHost: config-provided options are the developer
+        // speaking; the derivation only fills what they left unsaid.
+        config([
+            'kilden.frontend.cookie_domain' => '.example.com',
+            'kilden.frontend.options' => ['persistence' => 'localStorage'],
+        ]);
+
+        $html = FrontendSnippet::render();
+
+        $this->assertStringContainsString('"persistence":"localStorage"', $html);
+        $this->assertStringNotContainsString('localStorage+cookie', $html);
+        $this->assertStringContainsString('"cookieDomain":".example.com"', $html);
+    }
+
     public function test_renders_nothing_when_disabled(): void
     {
         config(['kilden.enabled' => false]);
